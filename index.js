@@ -5,7 +5,6 @@ const app = express();
 const port = 3000;
 const API_URL = "https://secrets-api.appbrewery.com/";
 
-//TODO 1: Fill in your values for the 3 types of auth.
 const yourUsername = "caroldev";
 const yourPassword = "WebDev2024";
 const yourAPIKey = "1de6a80b-4cfa-496a-b413-639602abdc33";
@@ -15,10 +14,15 @@ app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
 });
 
-app.get("/noAuth", (req, res) => {
-  //TODO 2: Use axios to hit up the /random endpoint
-  //The data you get back should be sent to the ejs file as "content"
-  //Hint: make sure you use JSON.stringify to turn the JS object from axios into a string.
+app.get("/noAuth", async (req, res) => {
+  try {
+      const response = await axios.get("https://secrets-api.appbrewery.com/random");
+      const result = JSON.stringify(response.data);
+      res.render("index.ejs", { content: result });
+  } catch (error) {
+    console.log("Unnable to show a secret:", error);
+    res.render("index.ejs", { content: "Sorry! An authentication problem occurred and we couldn't reveal a secret." });
+  }
 });
 
 app.get("/basicAuth", (req, res) => {

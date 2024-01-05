@@ -54,11 +54,13 @@
   <button id="apiKey" onclick="window.location.href='/apiKey'">API Key</button>
   <button id="bearerToken" onclick="window.location.href='/bearerToken'">Bearer Token</button>
 
+  <% if (locals.content) { %>
   <div class="response-area">
     <p>
       <%=content%>
     </p>
   </div>
+  <% } %>
 </body>
 
 </html>
