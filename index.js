@@ -6,10 +6,10 @@ const port = 3000;
 const API_URL = "https://secrets-api.appbrewery.com/";
 
 //TODO 1: Fill in your values for the 3 types of auth.
-const yourUsername = "";
-const yourPassword = "";
-const yourAPIKey = "";
-const yourBearerToken = "";
+const yourUsername = "caroldev";
+const yourPassword = "WebDev2024";
+const yourAPIKey = "1de6a80b-4cfa-496a-b413-639602abdc33";
+const yourBearerToken = "5284b9ed-60b3-48b0-b06c-a288d9ce2358";
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
