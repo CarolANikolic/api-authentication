@@ -16,12 +16,12 @@ app.get("/", (req, res) => {
 
 app.get("/noAuth", async (req, res) => {
   try {
-      const response = await axios.get("https://secrets-api.appbrewery.com/random");
-      const result = JSON.stringify(response.data);
-      res.render("index.ejs", { content: result });
+    const response = await axios.get("https://secrets-api.appbrewery.com/random");
+    const result = JSON.stringify(response.data);
+    res.render("index.ejs", { content: result });
   } catch (error) {
-    console.log("Unnable to show a secret:", error);
-    res.render("index.ejs", { content: "Sorry! An authentication problem occurred and we couldn't reveal a secret." });
+    console.log("Unnable to show a no auth secret:", error);
+    res.render("index.ejs", { content: "Sorry! We could not retrieve any secret." });
   }
 });
 
