@@ -8,7 +8,7 @@ const API_URL = "https://secrets-api.appbrewery.com";
 const yourUsername = "caroldev";
 const yourPassword = "WebDev2024";
 const yourAPIKey = "1de6a80b-4cfa-496a-b413-639602abdc33";
-const yourBearerToken = "5284b9ed-60b3-48b0-b06c-a288d9ce2358";
+const yourBearerToken = "f68919a4-4acf-498c-8991-48f23130e954";
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "API Response." });
@@ -59,20 +59,22 @@ app.get("/apiKey", async (req, res) => {
   }
 });
 
+const config = {
+  headers: {
+    Authorization: `Bearer ${yourBearerToken}`
+  }
+};
+
 app.get("/bearerToken", async (req, res) => {
-  //TODO 5: Write your code here to hit up the /secrets/{id} endpoint
-  //and get the secret with id of 42
-  //HINT: This is how you can use axios to do bearer token auth:
-  // https://stackoverflow.com/a/52645402
-  /*
-  axios.get(URL, {
-    headers: { 
-      Authorization: `Bearer <YOUR TOKEN HERE>` 
-    },
-  });
-  */
+  try {
+    const result = await axios.get(API_URL + "/secrets/2", config);
+    res.render("index.ejs", { content: JSON.stringify(result.data) });
+  } catch (error) {
+    console.log("Unnable to show a token auth secret:", error)
+  }
 });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  res.render("index.ejs", { content: "Sorry! An authentication problem occurred and we couldn't reveal a secret." });
 });
