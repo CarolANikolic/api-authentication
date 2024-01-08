@@ -3,7 +3,7 @@ import axios from "axios";
 
 const app = express();
 const port = 3000;
-const API_URL = "https://secrets-api.appbrewery.com/";
+const API_URL = "https://secrets-api.appbrewery.com"; 
 
 const yourUsername = "caroldev";
 const yourPassword = "WebDev2024";
@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 app.get("/noAuth", async (req, res) => {
   try {
-    const response = await axios.get("https://secrets-api.appbrewery.com/random");
+    const response = await axios.get(API_URL + "/random");
     const result = JSON.stringify(response.data);
     res.render("index.ejs", { content: result });
   } catch (error) {
@@ -28,7 +28,7 @@ app.get("/noAuth", async (req, res) => {
 app.get("/basicAuth", async (req, res) => {
   try {
     const response = await axios.get(
-      "https://secrets-api.appbrewery.com/all?page=2", {
+      API_URL + "/all?page=2", {
       auth: {
         username: yourUsername,
         password: yourPassword
@@ -45,7 +45,7 @@ app.get("/basicAuth", async (req, res) => {
 
 app.get("/apiKey", async (req, res) => {
   try {
-    const response = await axios.get("https://secrets-api.appbrewery.com" + "/filter", {
+    const response = await axios.get(API_URL + "/filter", {
       params: {
         score: 5,
         apiKey: yourAPIKey
@@ -58,7 +58,7 @@ app.get("/apiKey", async (req, res) => {
   }
 });
 
-app.get("/bearerToken", (req, res) => {
+app.get("/bearerToken", async (req, res) => {
   //TODO 5: Write your code here to hit up the /secrets/{id} endpoint
   //and get the secret with id of 42
   //HINT: This is how you can use axios to do bearer token auth:
