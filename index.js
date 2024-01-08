@@ -20,7 +20,7 @@ app.get("/noAuth", async (req, res) => {
     const result = JSON.stringify(response.data);
     res.render("index.ejs", { content: result });
   } catch (error) {
-    console.log("Unnable to show a no auth secret:", error);
+    console.log("Unable to show a no auth secret:", error);
     res.render("index.ejs", { content: "Sorry! We could not retrieve any secret." });
   }
 });
@@ -38,8 +38,8 @@ app.get("/basicAuth", async (req, res) => {
       const result = JSON.stringify(response.data);
       res.render("index.ejs", { content: result });
     } catch (error) {
-      console.log("Unnable to show a basic auth secret:", error);
-    res.render("index.ejs", { content: "Sorry! An authentication problem occurred and we couldn't reveal a secret." });
+      console.log("Unable to show a basic auth secret:", error);
+      res.render("index.ejs", { content: "Sorry! An authentication problem occurred and we couldn't reveal a secret." });
   }
 });
 
@@ -54,7 +54,8 @@ app.get("/apiKey", async (req, res) => {
     const result = JSON.stringify(response.data);
     res.render("index.ejs", { content: result})
   } catch (error) {
-    console.log(error)
+    console.log("Unable to show a key auth secret:", error);
+    res.render("index.ejs", { content: "Sorry! An authentication problem occurred and we couldn't reveal a secret." });
   }
 });
 
